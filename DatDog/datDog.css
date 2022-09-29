@@ -1,0 +1,31 @@
+ body {
+     background: rgb(250, 250, 250);
+
+ }
+
+ #mainContent {
+     color: rgb(40, 180, 200);
+     padding-left: 10pc;
+     font-family: Arial;
+ }
+
+ #table {
+     color: rgb(0, 0, 0);
+     margin: 20px;
+     font-family: Arial;
+ }
+
+ .locations {
+     font-family: Arial;
+     Margin-top: 210pt
+ }
+
+ .center {
+     margin-left: 37pc;
+     font-family: Arial;
+ }
+
+ .nav {
+     text-decoration-style: none;
+
+ }
