@@ -13,11 +13,13 @@
      color: rgb(0, 0, 0);
      margin: 20px;
      font-family: Arial;
+     border-style: dotted;
+     border: 5px; 
  }
 
  .locations {
      font-family: Arial;
-     Margin-top: 210pt
+     Margin-top: 
  }
 
  .center {
@@ -37,7 +39,7 @@
     text-decoration: none;
     color: rgb(0, 0, 0);
     font-family: Arial;
-    margin-left: px;
+    margin-left: 5px;
  }
 
  #menu {
