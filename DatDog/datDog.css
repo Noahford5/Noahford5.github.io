@@ -1,12 +1,16 @@
  body {
-     background: rgb(250, 250, 250);
+     background: rgb(40, 180, 200);
 
  }
 
  #mainContent {
-     color: rgb(40, 180, 200);
-     padding-left: 10pc;
+     color: rgb(27, 147, 180);
+     ;
      font-family: Arial;
+     padding: 3pt;
+     background-color: rgb(255, 255, 255);
+     border-radius: 25pt;
+
  }
 
  #table {
@@ -14,15 +18,15 @@
      margin: 20px;
      font-family: Arial;
      border-style: dotted;
-     border: 5px; 
+     background-color: rgb(255, 255, 255);
+     border-radius: 25pt
  }
 
  .locations {
      font-family: Arial;
-     Margin-top: 
  }
 
- .center {
+ #datTitle {
      margin-left: 37pc;
      font-family: Arial;
  }
@@ -33,19 +37,41 @@
      display: flex;
      padding: 10px;
  }
- 
+
  #website {
-    display:flex;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-family: Arial;
-    margin-left: 5px;
+     display: flex;
+     text-decoration: none;
+     font-family: Arial;
+
  }
 
  #menu {
-    display: flex;
-    text-decoration: none;
-    color: rgb(0, 0, 0);
-    font-family: Arial;
-    Margin: 0px
+     display: flex;
+     text-decoration: none;
+     font-family: Arial;
+     Margin-left: 10px
+ }
+
+ a:link {
+     color: rgb(0, 0, 0);
+ }
+
+ a:visited {
+     color: rgb(0, 0, 0);
+ }
+
+ a:hover {
+     color: rgb(255, 255, 255);
+ }
+
+ a:active {
+     color: rgb(40, 180, 200);
+ }
+
+ #logo {
+     margin-left: 46pc;
+ }
+
+ .datDog {
+     color: rgb(0, 0, 0)
  }
