@@ -69,7 +69,7 @@ var init = function (window) {
             
 
             // TODO 9 : Iterate over the array
-
+            //They repeated the same code multiple times.
 
         }
 
