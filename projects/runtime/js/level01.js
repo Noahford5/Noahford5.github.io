@@ -50,26 +50,28 @@ var level01 = function (window) {
             birdImg.x = -5
             birdImg.y = -5
         }
-        var enemy = game.createGameItem("enemy", 25);
-        var redSquare = draw.rect(50, 50, "red");
-        redSquare.x = -25;
-        redSquare.y = -25;
-        enemy.addChild(redSquare);
-        enemy.x = 400;
-        enemy.y = groundY - 50;
-        game.addGameItem(enemy);
-        enemy.velocityX -= 1;
-        enemy.onPlayerCollision = function playerCollision() {
-            game.changeIntegrity(-10)
-        };
-        enemy.onProjectileCollision = function projectileCollision() {
-            game.increaseScore(100);
-            enemy.fadeOut();
-        };
+        function createEnemy(x, y) {
+            var enemy = game.createGameItem("enemy", 25);
+            var redSquare = draw.rect(50, 50, "red");
+            redSquare.x = -25;
+            redSquare.y = -25;
+            enemy.addChild(redSquare);
+            enemy.x = x;
+            enemy.y = groundY - y;
+            game.addGameItem(enemy);
+            enemy.velocityX -= 2.5;
+            enemy.onPlayerCollision = function playerCollision() {
+                game.changeIntegrity(-10)
+            };
+            enemy.onProjectileCollision = function projectileCollision() {
+                game.increaseScore(100);
+                enemy.fadeOut();
+            };
+        }
 
-
-        for (var i = 1000; i < 35000; i += 500) {
-            var posNum = Math.floor(Math.random()* 2); 
+        // CREATION OF OBSTICALS 
+        for (var i = 1000; i < 15000; i += 500) {
+            var posNum = Math.floor(Math.random() * 2);
             var height;
             if (posNum === 1) {
                 height = 350;
@@ -77,6 +79,9 @@ var level01 = function (window) {
                 height = 250;
             }
             createSawBlade(i, height);
+        }
+        for (var i = 1500; i < 15000; i += 500) {
+            createEnemy(i, 50);
         }
         // DO NOT EDIT CODE BELOW HERE
     }
