@@ -23,7 +23,7 @@ var level01 = function (window) {
         };
         window.levelData = levelData;
         // set this to true or false depending on if you want to see hitzones
-        game.setDebugMode(true);
+        game.setDebugMode(false);
 
         // TODO 6 and on go here
         // BEGIN EDITING YOUR CODE HERE
@@ -61,7 +61,7 @@ var level01 = function (window) {
             game.addGameItem(enemy);
             enemy.velocityX -= 2.5;
             enemy.onPlayerCollision = function playerCollision() {
-                game.changeIntegrity(-10)
+                game.changeIntegrity(-50)
             };
             enemy.onProjectileCollision = function projectileCollision() {
                 game.increaseScore(100);
@@ -70,7 +70,7 @@ var level01 = function (window) {
         }
 
         // CREATION OF OBSTICALS 
-        for (var i = 1000; i < 15000; i += 500) {
+        for (var i = 1000; i < 16000; i += 500) {
             var posNum = Math.floor(Math.random() * 2);
             var height;
             if (posNum === 1) {
@@ -80,7 +80,7 @@ var level01 = function (window) {
             }
             createSawBlade(i, height);
         }
-        for (var i = 1500; i < 15000; i += 500) {
+        for (var i = 1500; i < 20000; i += 500) {
             createEnemy(i, 50);
         }
         // DO NOT EDIT CODE BELOW HERE
