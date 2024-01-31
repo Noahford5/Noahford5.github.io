@@ -71,7 +71,7 @@ $(document).ready(function () {
 
   // TODO 5-a: add a function that handles the bad display type
   function handleBad(data, repeat) {
-    repeat = +1;
+    repeat += 1;
     setBackgroundWithMixed = 3;
     animationDetails.displayType = 3;
   }
