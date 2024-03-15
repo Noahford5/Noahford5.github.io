@@ -13,12 +13,14 @@ function runProgram() {
   const $BOARDWIDTH = $('#')
 
   // Game Item Objects
+  // Walker controls
   var KEY = {
     LEFT: 37,
     UP: 38,
     RIGHT: 39,
     DOWN: 40
   }
+  // Walker location
   var walker = {
     locationX: 0,
     locationY: 0,
@@ -38,6 +40,7 @@ function runProgram() {
   On each "tick" of the timer, a new frame is dynamically drawn using JavaScript
   by calling this function and executing the code inside.
   */
+ // Shows new frame
   function newFrame() {
     repositionGameItem();
     wallCollision();
@@ -47,6 +50,7 @@ function runProgram() {
   /* 
   Called in response to events.
   */
+ // Sees if the keys are being pressed
   function handleKeyDown(event) {
     if (event.which === KEY.LEFT) {
       walker.speedX = -5;
@@ -62,6 +66,7 @@ function runProgram() {
       console.log('down');
     }
   }
+  // Sees if key is NOT being pressed
   function handleKeyUp(event) {
     if (event.which === KEY.LEFT) {
       walker.speedX = 0;
@@ -80,14 +85,17 @@ function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+  // Changes location of the Walker
   function repositionGameItem() {
     walker.locationX += walker.speedX;
     walker.locationY += walker.speedY;
   }
+  // Make the sprite of the Walker show up in the new location if changed
   function redrawGameItem() {
     $('#walker').css('left', walker.locationX)
     $('#walker').css('top', walker.locationY)
   }
+  // Sees if the Walker is touching the border
   function wallCollision() {
     if (walker.locationX < 0) {
       walker.locationX = walker.locationX + 5;
@@ -99,7 +107,7 @@ function runProgram() {
       walker.locationY = walker.locationY - 5;
     }
   }
-
+  // Ends the game
   function endGame() {
     // stop the interval timer
     clearInterval(interval);
