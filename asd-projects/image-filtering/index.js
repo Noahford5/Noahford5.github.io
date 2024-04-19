@@ -78,11 +78,11 @@ function reddify(reds){
 }
 
 // TODO 6: Create more filter functions
-// refer to function name
+// lopwers the value of blue
 function decreaseBlue (Blue){
   Blue[BLUE] = keepInBounds(BLUE - 50);
 }
-// refer to function name
+// adds the value amount of blue to green
 function increaseGreenByBlue (green){
   green[GREEN] = keepInBounds(BLUE + GREEN);
 }
