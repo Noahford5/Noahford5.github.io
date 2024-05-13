@@ -37,7 +37,7 @@ function runProgram() {
     positionX: 15,  // Starting X position
     positionY: 250,  // Starting Y position
     height: 150,  // how tall the paddle is
-    width: 30  // how wide the paddle is
+    width: 10  // how wide the paddle is
   }
 
   const paddleRight = {
@@ -47,7 +47,7 @@ function runProgram() {
     positionX: 1470,  // Starting X position
     positionY: 250,  // Starting Y position 
     height: 150,  // how tall the paddle is
-    width: 30  // how wide the paddle is
+    width: 10  // how wide the paddle is
   }
 
   // game variables
@@ -90,11 +90,10 @@ function runProgram() {
 
     ballBorderCollision(ball);
 
-    gameItemCollision(paddleLeft, ball);
-    gameItemCollision(paddleRight, ball);
+    gameItemCollision();
 
-    updateScore('#p1Score', 'p2Score', P1SCORE, P2SCORE)
-    
+    updateScore('#p1Score', '#p2Score', P1SCORE, P2SCORE)
+
   }
 
   /* 
@@ -129,24 +128,30 @@ function runProgram() {
   ////////////////////////////////////////////////////////////////////////////////
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
+
+  // internally moves ball
   function moveball(ball) {
     ball.positionY += ball.speedY;
     ball.positionX += ball.speedX;
   }
 
+  // internally moves paddle
   function movepaddle(paddle) {
     paddle.positionY += paddle.speedY
   }
 
+// visually moves paddle
   function redrawpaddle(paddle) {
     $(paddle.ID).css('top', paddle.positionY);
   }
 
+  // visually moves ball
   function redrawBall(ball) {
     $(ball.ID).css('top', ball.positionY);
     $(ball.ID).css('left', ball.positionX);
   }
 
+  // see if paddle hits border
   function paddleBorderCollision(paddle) {
     if (paddle.positionY <= BORDER_TOP) {
       paddle.positionY = BORDER_TOP;
@@ -154,13 +159,19 @@ function runProgram() {
       paddle.positionY = BORDER_BOTTOM - paddle.height;
     }
   }
+
+  // see if ball hits border
   function ballBorderCollision(ball) {
-    if (ball.positionX <= BORDER_LEFT) {
-      ball.speedX *= bounce;
+    if (ball.positionX <= BORDER_LEFT - ball.width) {
       P2SCORE++;
-    } else if (ball.positionX >= BORDER_RIGHT - BALL_WIDTH) {
-      ball.speedX *= bounce;
+      ball.positionX = 735; //  starting position X
+      ball.positionY = 250; // starting position Y
+      ball.speedX *= bounce
+    } else if (ball.positionX >= BORDER_RIGHT) {
       P1SCORE++;
+      ball.positionX = 735; //  starting position X
+      ball.positionY = 250; // starting position Y
+      ball.speedX *= bounce
     } else if (ball.positionY <= BORDER_TOP) {
       ball.speedY *= bounce;
     } else if (ball.positionY >= BORDER_BOTTOM - BALL_WIDTH) {
@@ -168,31 +179,27 @@ function runProgram() {
     }
   }
 
-  function gameItemCollision(paddle, ball) {
-    // paddle side declaration
-    paddle.left = paddle.positionX;
-    paddle.top = paddle.positionY;
-    paddle.right = paddle.posiitonX + paddle.width;
-    paddle.bottom = paddle.positionY + paddle.height;
-    // ball side declaration
-    ball.left = ball.positionX;
-    ball.top = ball.positionY;
-    ball.right = ball.positionX + ball.width;
-    ball.bottom = ball.positionY + ball.height;
-    // checks for collision
-    
-    if (paddle.left >= ball.right &&
-      paddle.right <= ball.left &&
-      paddle.top >= ball.bottom &&
-      paddle.bottom <= ball.top) {
-        console.log(ball.left)
+  // checks for ball collision on paddles left AND right
+  function gameItemCollision() {
+
+    // checks for collision left
+    if (paddleLeft.positionX + paddleLeft.width >= ball.positionX
+      && paddleLeft.positionY <= ball.positionY + ball.height
+      && paddleLeft.positionY + paddleLeft.height >= ball.positionY
+    ) {
       ball.speedX *= bounce;
-      ball.speedY *= bounce;
     }
-    // console.log(ball.left)
-    
+
+    // checks for collisions right
+    if (paddleRight.positionX + paddleRight.width <= ball.positionX + ball.width
+      && paddleRight.positionY <= ball.positionY + ball.height
+      && paddleRight.positionY + paddleRight.height >= ball.positionY
+    ) {
+      ball.speedX *= bounce;
+    }
+
   }
-  
+
   function updateScore(ID1, ID2, score1, score2) {
     $(ID1).text(score1);
     $(ID2).text(score2);

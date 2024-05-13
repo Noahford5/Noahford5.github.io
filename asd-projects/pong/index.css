@@ -23,7 +23,7 @@ body {
 
 #paddleLeft {
   background-color: rgb(180, 180, 180);
-  width: 30px;
+  width: 10px;
   height: 150px;
   position: absolute;
   left: 15px;
@@ -32,7 +32,7 @@ body {
 
 #paddleRight {
   background-color: rgb(180, 180, 180);
-  width: 30px;
+  width: 10px;
   height:150px;
   position: absolute;
   left: 1470px;
@@ -52,5 +52,5 @@ body {
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   font-size: 50px;
   margin-left: 830px;
-  
+  margin-top: -60px;
 }
