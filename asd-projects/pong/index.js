@@ -15,40 +15,60 @@ function runProgram() {
   const KEY = {
     W: 87,
     S: 83,
-    UP: 38,
-    DOWN: 40
+    I: 73,
+    K: 75,
+    R: 82
   }
 
+  function gameItems(ID, speedX, speedY, maxSpeed, positionX, positionY, height, width) {
+    obj = [];
+    obj.ID = ID;
+    obj.speedX = speedX;
+    obj.speedY = speedY;
+    obj.maxSpeed = maxSpeed,
+    obj.positionX = positionX;
+    obj.positionY = positionY;
+    obj.height = height;
+    obj.width = width;
+    return obj
+
+  }
+  var ball = gameItems('#ball', 5, 5, 5, 735, 250, 30, 30);
+  var paddleLeft = gameItems('#paddleLeft', 0, 0, 10, 15, 250, 150, 10);
+  var paddleRight = gameItems('#paddleRight', 0, 0, 10, 1470, 250, 150, 10);
   // Game Item Objects
-  const ball = {
-    ID: '#ball',
-    speedX: 5,
-    speedY: 5,
-    positionX: 735,
-    positionY: 250,
-    height: 50,
-    width: 50
-  }
+  // const ball = {
+  //   ID: '#ball',
+  //   speedX: 5,
+  //   speedY: 5,
+  //   maxSpeed:5,
+  //   positionX: 735,
+  //   positionY: 250,
+  //   height: 30,
+  //   width: 30
+  // }
 
-  const paddleLeft = {
-    ID: '#paddleLeft',
-    speedY: 0,  // Start speed -- will change
-    maxSpeed: 8,  // Max speed
-    positionX: 15,  // Starting X position
-    positionY: 250,  // Starting Y position
-    height: 150,  // how tall the paddle is
-    width: 10  // how wide the paddle is
-  }
+  // const paddleLeft = {
+  //   ID: '#paddleLeft',
+  //   speedX: 0,
+  //   speedY: 0,  // Start speed -- will change
+  //   maxSpeed: 10,  // Max speed
+  //   positionX: 15,  // Starting X position
+  //   positionY: 250,  // Starting Y position
+  //   height: 150,  // how tall the paddle is
+  //   width: 10  // how wide the paddle is
+  // }
 
-  const paddleRight = {
-    ID: '#paddleRight',
-    speedY: 0,  // starting speed -- will change
-    maxSpeed: 8,  // Max speed
-    positionX: 1470,  // Starting X position
-    positionY: 250,  // Starting Y position 
-    height: 150,  // how tall the paddle is
-    width: 10  // how wide the paddle is
-  }
+  // const paddleRight = {
+  //   ID: '#paddleRight',
+  //   speedX: 0,
+  //   speedY: 0,  // starting speed -- will change
+  //   maxSpeed: 10,  // Max speed
+  //   positionX: 1470,  // Starting X position
+  //   positionY: 250,  // Starting Y position 
+  //   height: 150,  // how tall the paddle is
+  //   width: 10  // how wide the paddle is
+  // }
 
   // game variables
   let P1SCORE = 0;
@@ -75,15 +95,15 @@ function runProgram() {
   by calling this function and executing the code inside.
   */
   function newFrame() {
-    moveball(ball);
+    moveItem(ball);
 
-    movepaddle(paddleLeft);
-    movepaddle(paddleRight);
+    moveItem(paddleLeft);
+    moveItem(paddleRight);
 
-    redrawpaddle(paddleLeft);
-    redrawpaddle(paddleRight);
+    redrawItem(paddleLeft);
+    redrawItem(paddleRight);
 
-    redrawBall(ball);
+    redrawItem(ball);
 
     paddleBorderCollision(paddleLeft);
     paddleBorderCollision(paddleRight);
@@ -94,34 +114,37 @@ function runProgram() {
 
     updateScore('#p1Score', '#p2Score', P1SCORE, P2SCORE)
 
+    console.log(paddleLeft.positionX)
+
   }
 
   /* 
   Called in response to events.
   */
   function handleKeyDown(event) {
-    if (event.which === KEY.UP) {
+    if (event.which === KEY.W) {
       paddleLeft.speedY = paddleLeft.maxSpeed * -1;
       console.log(paddleLeft.speedY);
-    } else if (event.which === KEY.DOWN) {
+    } else if (event.which === KEY.S) {
       paddleLeft.speedY = paddleLeft.maxSpeed;
 
-    } else if (event.which === KEY.W) {
+    } else if (event.which === KEY.I) {
       paddleRight.speedY = paddleRight.maxSpeed * -1;
 
-    } else if (event.which === KEY.S) {
+    } else if (event.which === KEY.K) {
       paddleRight.speedY = paddleRight.maxSpeed;
 
     }
   }
+
   function handleKeyUp(event) {
-    if (event.which === KEY.UP) {
+    if (event.which === KEY.W) {
       paddleLeft.speedY = stationarySpeed;
-    } else if (event.which === KEY.DOWN) {
-      paddleLeft.speedY = stationarySpeed;
-    } else if (event.which === KEY.W) {
-      paddleRight.speedY = stationarySpeed;
     } else if (event.which === KEY.S) {
+      paddleLeft.speedY = stationarySpeed;
+    } else if (event.which === KEY.I) {
+      paddleRight.speedY = stationarySpeed;
+    } else if (event.which === KEY.K) {
       paddleRight.speedY = stationarySpeed;
     }
   }
@@ -129,26 +152,16 @@ function runProgram() {
   ////////////////////////// HELPER FUNCTIONS ////////////////////////////////////
   ////////////////////////////////////////////////////////////////////////////////
 
-  // internally moves ball
-  function moveball(ball) {
-    ball.positionY += ball.speedY;
-    ball.positionX += ball.speedX;
+  // internally moves item
+  function moveItem(item) {
+    item.positionY += item.speedY;
+    item.positionX += item.speedX;
   }
 
-  // internally moves paddle
-  function movepaddle(paddle) {
-    paddle.positionY += paddle.speedY
-  }
-
-// visually moves paddle
-  function redrawpaddle(paddle) {
-    $(paddle.ID).css('top', paddle.positionY);
-  }
-
-  // visually moves ball
-  function redrawBall(ball) {
-    $(ball.ID).css('top', ball.positionY);
-    $(ball.ID).css('left', ball.positionX);
+  // visually moves item
+  function redrawItem(item) {
+    $(item.ID).css('top', item.positionY);
+    $(item.ID).css('left', item.positionX);
   }
 
   // see if paddle hits border
@@ -166,12 +179,12 @@ function runProgram() {
       P2SCORE++;
       ball.positionX = 735; //  starting position X
       ball.positionY = 250; // starting position Y
-      ball.speedX *= bounce
+      ball.speedX = bounce * 5;
     } else if (ball.positionX >= BORDER_RIGHT) {
       P1SCORE++;
       ball.positionX = 735; //  starting position X
       ball.positionY = 250; // starting position Y
-      ball.speedX *= bounce
+      ball.speedX = bounce * 5;
     } else if (ball.positionY <= BORDER_TOP) {
       ball.speedY *= bounce;
     } else if (ball.positionY >= BORDER_BOTTOM - BALL_WIDTH) {
@@ -187,7 +200,7 @@ function runProgram() {
       && paddleLeft.positionY <= ball.positionY + ball.height
       && paddleLeft.positionY + paddleLeft.height >= ball.positionY
     ) {
-      ball.speedX *= bounce;
+      ball.speedX *= bounce * 1.2;
     }
 
     // checks for collisions right
@@ -195,11 +208,12 @@ function runProgram() {
       && paddleRight.positionY <= ball.positionY + ball.height
       && paddleRight.positionY + paddleRight.height >= ball.positionY
     ) {
-      ball.speedX *= bounce;
+      ball.speedX *= bounce * 1.2;
     }
 
   }
 
+  // updates score
   function updateScore(ID1, ID2, score1, score2) {
     $(ID1).text(score1);
     $(ID2).text(score2);
