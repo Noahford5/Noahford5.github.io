@@ -83,8 +83,6 @@ function runProgram() {
 
     updateScore('#p1Score', '#p2Score', P1SCORE, P2SCORE)
 
-    console.log(paddleLeft.positionX)
-
   }
 
   /* 
@@ -112,6 +110,7 @@ function runProgram() {
       P2SCORE = 0
       ball.positionX = 735;
       ball.positionY = 250;
+      ball.speedX *= bounce;
     }
   }
 
