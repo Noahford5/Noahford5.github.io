@@ -17,7 +17,7 @@ function runProgram() {
     S: 83,
     I: 73,
     K: 75,
-    R: 82
+    B: 66
   }
 
   function gameItems(ID, speedX, speedY, maxSpeed, positionX, positionY, height, width) {
@@ -31,44 +31,13 @@ function runProgram() {
     obj.height = height;
     obj.width = width;
     return obj
-
   }
+
+  // Game Item Objects  
   var ball = gameItems('#ball', 5, 5, 5, 735, 250, 30, 30);
   var paddleLeft = gameItems('#paddleLeft', 0, 0, 10, 15, 250, 150, 10);
   var paddleRight = gameItems('#paddleRight', 0, 0, 10, 1470, 250, 150, 10);
-  // Game Item Objects
-  // const ball = {
-  //   ID: '#ball',
-  //   speedX: 5,
-  //   speedY: 5,
-  //   maxSpeed:5,
-  //   positionX: 735,
-  //   positionY: 250,
-  //   height: 30,
-  //   width: 30
-  // }
-
-  // const paddleLeft = {
-  //   ID: '#paddleLeft',
-  //   speedX: 0,
-  //   speedY: 0,  // Start speed -- will change
-  //   maxSpeed: 10,  // Max speed
-  //   positionX: 15,  // Starting X position
-  //   positionY: 250,  // Starting Y position
-  //   height: 150,  // how tall the paddle is
-  //   width: 10  // how wide the paddle is
-  // }
-
-  // const paddleRight = {
-  //   ID: '#paddleRight',
-  //   speedX: 0,
-  //   speedY: 0,  // starting speed -- will change
-  //   maxSpeed: 10,  // Max speed
-  //   positionX: 1470,  // Starting X position
-  //   positionY: 250,  // Starting Y position 
-  //   height: 150,  // how tall the paddle is
-  //   width: 10  // how wide the paddle is
-  // }
+  
 
   // game variables
   let P1SCORE = 0;
@@ -125,26 +94,38 @@ function runProgram() {
     if (event.which === KEY.W) {
       paddleLeft.speedY = paddleLeft.maxSpeed * -1;
       console.log(paddleLeft.speedY);
-    } else if (event.which === KEY.S) {
+    }
+    if (event.which === KEY.S) {
       paddleLeft.speedY = paddleLeft.maxSpeed;
 
-    } else if (event.which === KEY.I) {
+    }
+    if (event.which === KEY.I) {
       paddleRight.speedY = paddleRight.maxSpeed * -1;
 
-    } else if (event.which === KEY.K) {
+    }
+    if (event.which === KEY.K) {
       paddleRight.speedY = paddleRight.maxSpeed;
-
+    }
+    // resets score
+    if (event.which === KEY.B) {
+      P1SCORE = 0;
+      P2SCORE = 0
+      ball.positionX = 735;
+      ball.positionY = 250;
     }
   }
 
   function handleKeyUp(event) {
     if (event.which === KEY.W) {
       paddleLeft.speedY = stationarySpeed;
-    } else if (event.which === KEY.S) {
+    }
+    if (event.which === KEY.S) {
       paddleLeft.speedY = stationarySpeed;
-    } else if (event.which === KEY.I) {
+    }
+    if (event.which === KEY.I) {
       paddleRight.speedY = stationarySpeed;
-    } else if (event.which === KEY.K) {
+    }
+    if (event.which === KEY.K) {
       paddleRight.speedY = stationarySpeed;
     }
   }
